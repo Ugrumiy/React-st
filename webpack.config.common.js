@@ -7,14 +7,14 @@ const webpack = require('webpack');
 
 const extractSass = new ExtractTextPlugin({
   filename: "styles/[name].[contenthash].css",
-  disable: process.env.NODE_ENV === "development"
+  disable: process.env.NODE_ENV === "dev"
 });
 
 module.exports = {
   entry: [
     'babel-polyfill',
     'react-hot-loader/patch',
-    './src/main.js'
+     './src/main.js'
   ],
   plugins: [
     new CleanWebpackPlugin(['dist']),
@@ -39,31 +39,12 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         use: ['babel-loader',
           /*{
-           loader: 'eslint-loader',
-           options: {
-           failOnWarning: false,
-           failOnError: false,
-           }
-           }*/],
-      },
-      {
-        test: /\.scss$/,
-        use: extractSass.extract({
-          publicPath: '../',
-          use: [{
-            loader: "css-loader", options: {
-              sourceMap: true
-            }
-          }, {
-            loader: "resolve-url-loader"
-          }, {
-            loader: "fast-sass-loader", options: {
-              sourceMap: true
-            }
-          }],
-          // use style-loader in development
-          fallback: "style-loader"
-        })
+          loader: 'eslint-loader',
+          options: {
+            failOnWarning: false,
+            failOnError: false,
+          }
+        }*/],
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
