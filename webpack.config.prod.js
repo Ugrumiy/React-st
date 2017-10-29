@@ -30,7 +30,10 @@ module.exports = merge(common, {
           }, {
             loader: "resolve-url-loader"
           }, {
-            loader: "fast-sass-loader"
+            loader: "fast-sass-loader",
+            options: {
+              data: "$env: " + process.env.NODE_ENV + ";"
+            }
           }],
           // use style-loader in development
           fallback: "style-loader"

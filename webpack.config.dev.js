@@ -15,15 +15,16 @@ module.exports = merge(common, {
       {
         test: /\.scss$/,
         use: [{
-          loader: "style-loader" // creates style nodes from JS strings
+          loader: "style-loader"
         }, {
           loader: "css-loader", options: {
             sourceMap: true
           }
         }, {
           loader: "fast-sass-loader", options: {
-            sourceMap: true
-          } // compiles Sass to CSS
+            sourceMap: true,
+            data: "$env: " + process.env.NODE_ENV + ";"
+          }
         }]
       },
     ]
