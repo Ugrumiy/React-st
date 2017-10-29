@@ -1,0 +1,33 @@
+
+bs/**
+# Node dependencies
+node_modules/**
+# Build folders
+build/**
+src/globals/**
+src/components/avn
+src/components/BasicModules
+src/components/ContentModules
+src/components/DwaComponents
+src/components/FunctionalModules
+src/components/NavigationModules
+src/components/PowerlayerModules
+src/components/SiteMap
+src/components/StageModules
+src/components/TeaserModules
+src/components/Tools
+src/components/UacComponents
+src/components/UI_Elements
+src/components/React
+src/reducers
+# Build systems ignore
+webpack.config.js
+index.js
+resources/webpack/**
+gulpfile.js
+resources/gulp/**
+# Other files
+**/*.sass
+**/*.css
+**/*.html
+**/*.pug
