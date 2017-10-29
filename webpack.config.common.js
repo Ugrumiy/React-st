@@ -11,9 +11,11 @@ const extractSass = new ExtractTextPlugin({
 });
 
 module.exports = {
-  entry: {
-    index: './src/app/index.js'
-  },
+  entry: [
+    'babel-polyfill',
+    'react-hot-loader/patch',
+    './src/main.js'
+  ],
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new webpack.ProvidePlugin({
@@ -21,33 +23,28 @@ module.exports = {
     }),
     new HTMLWebpackPlugin({
       title: 'Production',
-      template: 'src/app/index.ejs',
+      template: './src/index.ejs',
       path: '../'
     }),
     new webpack.DefinePlugin({
       'ENV': JSON.stringify(process.env.NODE_ENV),
     }),
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
     extractSass],
   module: {
     rules: [
       {
         test: /\.js[x]?$/,
         exclude: /(node_modules|bower_components)/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            presets: ['env', 'react',
-              'stage-0'],
-            plugins: ['transform-decorators-legacy'],
-            cacheDirectory: true,
-          }
-        },        /*{
-          loader: 'eslint-loader',
-          options: {
-            failOnWarning: false,
-            failOnError: false,
-          }
-        }*/],
+        use: ['babel-loader',
+          /*{
+           loader: 'eslint-loader',
+           options: {
+           failOnWarning: false,
+           failOnError: false,
+           }
+           }*/],
       },
       {
         test: /\.scss$/,
@@ -57,7 +54,7 @@ module.exports = {
             loader: "css-loader", options: {
               sourceMap: true
             }
-          },{
+          }, {
             loader: "resolve-url-loader"
           }, {
             loader: "fast-sass-loader", options: {
