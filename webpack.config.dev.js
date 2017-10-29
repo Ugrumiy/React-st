@@ -3,9 +3,12 @@ const common = require('./webpack.config.common.js');
 
 
 module.exports = merge(common, {
-  entry: [
-    'babel-polyfill',
-    'react-hot-loader/patch',
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("development")
+      }
+    })
   ],
   module: {
     rules: [
@@ -15,8 +18,8 @@ module.exports = merge(common, {
           loader: "style-loader" // creates style nodes from JS strings
         }, {
           loader: "css-loader", options: {
-  sourceMap: true
-}
+            sourceMap: true
+          }
         }, {
           loader: "fast-sass-loader", options: {
             sourceMap: true
@@ -25,10 +28,10 @@ module.exports = merge(common, {
       },
     ]
   },
- devtool: 'inline-source-map',
-   devServer: {
-     contentBase: './dist',
-     historyApiFallback: true,
-     hot: true
-   }
- });
+  devtool: 'inline-source-map',
+  devServer: {
+    contentBase: './dist',
+    historyApiFallback: true,
+    hot: true
+  }
+});

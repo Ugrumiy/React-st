@@ -3,3 +3,4 @@
 /dist
 *.css.map
 *.js.map
+ stats.json

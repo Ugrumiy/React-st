@@ -1,13 +1,14 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const webpack = require('webpack');
 const StatsPlugin = require('stats-webpack-plugin');
 
 module.exports = {
   entry: [
-     './src/main.js'
+    // 'babel-polyfill',
+    'react-hot-loader/patch',
+    './src/main.js'
   ],
   plugins: [
     new StatsPlugin('stats.json', {
@@ -23,9 +24,6 @@ module.exports = {
       template: './src/index.ejs',
       path: '../'
     }),
-    new webpack.DefinePlugin({
-      'ENV': JSON.stringify(process.env.NODE_ENV),
-    }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()],
   module: {
@@ -35,12 +33,21 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         use: ['babel-loader',
           /*{
-          loader: 'eslint-loader',
+           loader: 'eslint-loader',
+           options: {
+           failOnWarning: false,
+           failOnError: false,
+           }
+           }*/],
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: [{
+          loader: 'file-loader',
           options: {
-            failOnWarning: false,
-            failOnError: false,
+            outputPath: 'fonts/'
           }
-        }*/],
+        }]
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
