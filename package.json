@@ -39,7 +39,8 @@
   "dependencies": {
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-hot-loader": "^3.1.1"
+    "react-hot-loader": "^3.1.1",
+    "stats-webpack-plugin": "^0.6.1"
   },
   "scripts": {
     "start": "set NODE_ENV=dev && webpack-dev-server --open --config webpack.config.dev.js",

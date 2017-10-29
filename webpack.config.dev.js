@@ -3,6 +3,10 @@ const common = require('./webpack.config.common.js');
 
 
 module.exports = merge(common, {
+  entry: [
+    'babel-polyfill',
+    'react-hot-loader/patch',
+  ],
   module: {
     rules: [
       {

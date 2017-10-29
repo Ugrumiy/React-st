@@ -3,20 +3,17 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const webpack = require('webpack');
-
-
-const extractSass = new ExtractTextPlugin({
-  filename: "styles/[name].[contenthash].css",
-  disable: process.env.NODE_ENV === "dev"
-});
+const StatsPlugin = require('stats-webpack-plugin');
 
 module.exports = {
   entry: [
-    'babel-polyfill',
-    'react-hot-loader/patch',
      './src/main.js'
   ],
   plugins: [
+    new StatsPlugin('stats.json', {
+      chunkModules: true,
+      exclude: [/node_modules[\\\/]react/]
+    }),
     new CleanWebpackPlugin(['dist']),
     new webpack.ProvidePlugin({
       React: 'react',
@@ -30,8 +27,7 @@ module.exports = {
       'ENV': JSON.stringify(process.env.NODE_ENV),
     }),
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    extractSass],
+    new webpack.HotModuleReplacementPlugin()],
   module: {
     rules: [
       {
