@@ -3,6 +3,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const StatsPlugin = require('stats-webpack-plugin');
+const modernizr = require('modernizr');
 
 module.exports = {
   entry: [
@@ -57,7 +58,13 @@ module.exports = {
             outputPath: 'image/'
           }
         }]
-      }
+      },
+      {
+        test: /\.modernizrrc.js$/,
+        use: [{
+          loader: "modernizr-loader"
+        }]
+      },
     ]
   },
   resolve: {
@@ -65,6 +72,7 @@ module.exports = {
       pages: path.resolve(__dirname, 'src/pages/'),
       components: path.resolve(__dirname, 'src/components/'),
       globals: path.resolve(__dirname, 'src/globals/'),
+      modernizr$: path.resolve(__dirname, "./.modernizrrc.js")
     },
     extensions: ['.js', '.jsx']
   },
